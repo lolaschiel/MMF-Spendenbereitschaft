@@ -1,0 +1,92 @@
+---
+title: "MMF Auswertung"
+author: "Lola Schiel"
+date: "8 1 2022"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Daten einlesen
+
+
+```{r}
+alles <- read.csv("https://raw.githubusercontent.com/lolaschiel/MMF-Spendenbereitschaft/main/data.csv", header=TRUE, sep=";")
+alles_na <- alles
+alles_na[alles_na=="99"] <- NA
+
+
+savethechildren <- subset(alles, organisation==1)
+savethechildren_na <- savethechildren
+savethechildren_na[savethechildren_na=="99"] <- NA
+
+greenpeace <- subset(alles, organisation==2)
+greenpeace_na <- greenpeace
+greenpeace_na[greenpeace_na=="99"] <- NA
+
+bund <- subset(alles, organisation==3)
+bund_na <- bund
+bund_na[bund_na=="99"] <- NA
+
+bvhk <- subset(alles, organisation==4)
+bvhk_na <- bvhk
+bvhk_na[bvhk_na=="99"] <- NA
+
+wwf <- subset(alles, organisation==5)
+wwf_na <- wwf
+wwf_na[wwf_na=="99"] <- NA
+
+caritas <- subset(alles, organisation==6)
+caritas_na <- caritas
+caritas_na[caritas_na=="99"] <- NA
+
+plan <- subset(alles, organisation==7)
+plan_na <- plan
+plan_na[plan_na=="99"] <- NA
+
+whh <- subset(alles, organisation==8)
+whh_na <- whh
+whh_na[whh_na=="99"] <- NA
+
+
+alles
+```
+
+## Spalten: Anzahl (absolut)
+
+
+```{r}
+
+datensatz <- whh
+
+for (col in 3:ncol(datensatz)) {
+
+  print(colnames(datensatz)[col])
+  table <- table(datensatz[,col])
+  print(table)
+  cat("\n\n")
+}
+
+
+```
+
+## Spalten: Prozente (relativ)
+
+
+```{r}
+
+datensatz <- whh
+
+for (col in 3:ncol(datensatz)) {
+
+  print(colnames(datensatz)[col])
+  table <- round(prop.table(table(datensatz[,col])), digits=4)*100
+  print(table)
+  cat("\n\n")
+}
+
+```
+
+
